@@ -12,17 +12,21 @@ import java.util.Scanner;
 public class NetworkUtils {
 
     final static String BASE_URL =
-            "https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=d7ea9f45d7f141d3a1fd790be03b5ed9";
+            "https://newsapi.org/v1/articles";
 
     final static String QUERY = "source";
     final static String SORT = "sortBy";
     final static String sortBy = "apiKey";
+    final static String QUERY_VALUE="the-next-web";
+    final static String SORT_VALUE="latest";
+    final static String  SORTBY_VALUE="";
 
 
     public static URL buildUrl(String githubSearchQuery) {
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                .appendQueryParameter(QUERY, githubSearchQuery)
-                .appendQueryParameter(SORT, sortBy)
+                .appendQueryParameter(QUERY, QUERY_VALUE)
+                .appendQueryParameter(SORT, SORT_VALUE)
+                .appendQueryParameter(sortBy,SORTBY_VALUE)
                 .build();
 
         URL url = null;
