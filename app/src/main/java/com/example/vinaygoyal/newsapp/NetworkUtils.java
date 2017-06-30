@@ -2,34 +2,46 @@ package com.example.vinaygoyal.newsapp;
 
 import android.net.Uri;
 
+import com.example.vinaygoyal.newsapp.model.NewsItem;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NetworkUtils {
 
-    final static String BASE_URL =
-            "https://newsapi.org/v1/articles";
+    final static String NEWS_BASE_URL = "https://newsapi.org/v1/articles";
 
-    final static String QUERY = "source";
-    final static String SORT = "sortBy";
-    final static String sortBy = "apiKey";
-    final static String QUERY_VALUE="the-next-web";
-    final static String SORT_VALUE="latest";
-    final static String  SORTBY_VALUE="";
+    final static String PARAM_SOURCE = "source";
+
+    final static String PARAM_SORT = "sortBy";
+
+    final static String PARAM_API = "apiKey";
+
+    final static String sortBy = "latest";
+
+    final static String source = "the-next-web";
+
+    final static String apiKey = "d526a960882941848faf5fd5d868ccd8";
 
 
-    public static URL buildUrl(String githubSearchQuery) {
-        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                .appendQueryParameter(QUERY, QUERY_VALUE)
-                .appendQueryParameter(SORT, SORT_VALUE)
-                .appendQueryParameter(sortBy,SORTBY_VALUE)
+    public static URL buildUrl(){
+        Uri builtUri = Uri.parse(NEWS_BASE_URL).buildUpon()
+                .appendQueryParameter(PARAM_SOURCE,source)
+                .appendQueryParameter(PARAM_SORT,sortBy)
+                .appendQueryParameter(PARAM_API, apiKey)
                 .build();
 
         URL url = null;
+
         try {
             url = new URL(builtUri.toString());
         } catch (MalformedURLException e) {
